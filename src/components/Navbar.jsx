@@ -54,9 +54,8 @@ const Navbar = () => {
     <Typography style={style.colorSearchNavbar}>search:</Typography>
     <TextField
     sx={style.searchNavbar}
-          label="Size"
+          label="Search"
           id="outlined-size-small"
-          defaultValue="Small"
           size="small"
           color="primary"
         />
