@@ -29,14 +29,13 @@ export default function AddToCart() {
       <Stack direction="row" spacing={6}>
         <div>
         <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650, }} aria-label="caption table">
+      <Table sx={{ minWidth: 800, }} aria-label="caption table">
         <TableHead >
           <TableRow sx={style.tableHeadingCSS}>
-            <TableCell>Image</TableCell>
-            <TableCell align="right">Name</TableCell>
-            <TableCell align="right">Color</TableCell>
-            <TableCell align="right">Stock</TableCell>
-            <TableCell align="right">Buy</TableCell>
+            <TableCell>Products</TableCell>
+            <TableCell align="right">Price</TableCell>
+            <TableCell align="right">Quantity</TableCell>
+            <TableCell align="right">Subtotal</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -48,7 +47,6 @@ export default function AddToCart() {
               <TableCell align="right">{row.calories}</TableCell>
               <TableCell align="right">{row.fat}</TableCell>
               <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -77,7 +75,7 @@ export default function AddToCart() {
       </CardActionArea>
       <CardActions sx={style.cardActionCss}>
         <Button sx={style.cardButtonCss} size="small" variant='contained'>
-          Share
+          proceed to checkout
         </Button>
       </CardActions>
     </Card>
