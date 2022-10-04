@@ -7,6 +7,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { Button, CardActionArea, CardActions } from '@mui/material';
+
 import style from '../utils/style';
 export default function AddToCart() {
     function createData(name, calories, fat, carbs, protein) {
@@ -20,7 +26,7 @@ export default function AddToCart() {
       ];
   return (
     <div>
-      <Stack direction="row" spacing={2}>
+      <Stack direction="row" spacing={6}>
         <div>
         <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650, }} aria-label="caption table">
@@ -48,6 +54,26 @@ export default function AddToCart() {
         </TableBody>
       </Table>
     </TableContainer>
+        </div>
+        <div>
+        <Card sx={{ maxWidth: 345 }}>
+      <CardActionArea>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            Lizard
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Lizards are a widespread group of squamate reptiles, with over 6,000
+            species, ranging across all continents except Antarctica
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions sx={style.cardActionCss}>
+        <Button sx={style.cardButtonCss} size="small" variant='contained'>
+          Share
+        </Button>
+      </CardActions>
+    </Card>
         </div>
       </Stack>
     </div>

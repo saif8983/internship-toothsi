@@ -25,6 +25,16 @@ const style = {
     //That is table css
     tableHeadingCSS:{
       fontWeight:'bold'
+    },
+    cardActionCss:{
+      display:'flex',
+      flexDirection:'row',
+      justifyContent:'center',
+      alingment:'center',
+    },
+    cardButtonCss:{
+      borderRadius:100,
+      width:'15rem'
     }
 }
 export default style
