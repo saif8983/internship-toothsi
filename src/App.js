@@ -1,13 +1,21 @@
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import TableOfProducts from './components/TableOfProducts';
-import Navbar from './components/Navbar';
+import AddToCart from './components/AddToCart';
 function App() {
   return (
     <>
-    <div className="App">
-      <Navbar/>
-    </div>
-    <div><TableOfProducts/></div>
+      <Router>
+        
+          <div>
+        <Routes>
+            <Route exact path="/" element={<TableOfProducts />} />
+            <Route exact path="/addtocart" element={<AddToCart/>} />
+
+        </Routes>
+          </div>
+      </Router>
+
     </>
   );
 }

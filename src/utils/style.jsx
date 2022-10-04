@@ -21,6 +21,10 @@ const style = {
     addToCartButton:{
       
       marginLeft:'1rem'
+    },
+    //That is table css
+    tableHeadingCSS:{
+      fontWeight:'bold'
     }
 }
 export default style

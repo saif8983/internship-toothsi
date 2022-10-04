@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,22 +8,21 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import style from '../utils/style';
-import Navbar from './Navbar';
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-];
-export default function AcccessibleTable() {
+export default function AddToCart() {
+    function createData(name, calories, fat, carbs, protein) {
+        return { name, calories, fat, carbs, protein };
+      }
+      
+      const rows = [
+        createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+        createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+        createData('Eclair', 262, 16.0, 24, 6.0),
+      ];
   return (
-    <>
-<Navbar/>
-    <TableContainer component={Paper}>
+    <div>
+      <Stack direction="row" spacing={2}>
+        <div>
+        <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650, }} aria-label="caption table">
         <TableHead >
           <TableRow sx={style.tableHeadingCSS}>
@@ -48,6 +48,8 @@ export default function AcccessibleTable() {
         </TableBody>
       </Table>
     </TableContainer>
-    </>
+        </div>
+      </Stack>
+    </div>
   );
 }
