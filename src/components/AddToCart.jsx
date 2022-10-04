@@ -60,12 +60,19 @@ export default function AddToCart() {
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            Cart Totals
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+          <Stack direction="row" spacing={6}><Typography variant="h6" color="text.secondary">
+            Subtotal
           </Typography>
+            <Typography>123</Typography>
+          </Stack>
+          
+          <Stack direction="row" spacing={9}><Typography variant="h6" color="text.secondary">
+            Totals
+          </Typography>
+          <Typography>144</Typography>
+          </Stack>
         </CardContent>
       </CardActionArea>
       <CardActions sx={style.cardActionCss}>
