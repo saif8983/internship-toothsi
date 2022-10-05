@@ -35,6 +35,10 @@ const style = {
     cardButtonCss:{
       borderRadius:100,
       width:'15rem'
+    },
+    inputQuantitycss:{
+      width:"2rem",
+      height:'2%'
     }
 }
 export default style

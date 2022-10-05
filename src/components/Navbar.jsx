@@ -16,7 +16,7 @@ const Navbar = () => {
       <AppBar position="static" style={style.backgroundOfNavbar}>
         <Toolbar>
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-      <InputLabel id="demo-select-small">Age</InputLabel>
+      <InputLabel id="demo-select-small">Category</InputLabel>
       <Select
         labelId="demo-select-small"
         id="demo-select-small"
@@ -27,9 +27,9 @@ const Navbar = () => {
         <MenuItem value="">
           <em>None</em>
         </MenuItem>
-        <MenuItem value={10}>Hodies</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
+        <MenuItem value={10}>Hoddies</MenuItem>
+        <MenuItem value={20}>T-shirts</MenuItem>
+        <MenuItem value={30}>Shirts</MenuItem>
       </Select>
     </FormControl>
          
