@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -9,21 +10,40 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import { useSelector } from 'react-redux';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import style from '../utils/style';
+
+const handleProductQuantity = (id, qunatity, newproduct) => {
+  const updateCartProducts = JSON.parse(JSON.stringify(newproduct))
+  const updateIndex = updateCartProducts.findIndex((item) => item.id === id)
+  updateCartProducts[updateIndex].qunatity = qunatity > 0||!isNaN(qunatity) ? qunatity : 1;
+  console.log(updateCartProducts)
+  return updateCartProducts
+
+}
 export default function AddToCart() {
-    function createData(name, calories, fat, carbs, protein) {
-        return { name, calories, fat, carbs, protein };
-      }
-      
-      const rows = [
-        createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-        createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-        createData('Eclair', 262, 16.0, 24, 6.0),
-      ];
+  const dispatch=useDispatch()
+   const [addCarts,setAddCarts]=useState([])
+  const selector = useSelector((state) => {
+    return {
+      addCart: state.products
+    }
+  })
+  const { addCart } = selector
+  const handleRemove=(row)=>{
+    dispatch({
+      type:'remove_cart',
+      payload:{removeProduct:row}
+    })
+  }
+  useEffect(()=>{
+setAddCarts(addCart)
+  },[addCart])
   return (
     <div>
       <Stack direction="row" spacing={6}>
@@ -39,14 +59,42 @@ export default function AddToCart() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
+          {addCarts.map((row,index) => (
+            
+            <TableRow key={index}>
               <TableCell component="th" scope="row">
-                {row.name}
+              <Stack direction="row" spacing={1}>
+              <Button onClick={()=>handleRemove(row)}><HighlightOffIcon  /></Button>
+              <img src={row.image}/>
+              {row.title}
+              </Stack>
+               
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
+              <TableCell align="right">{row.price}</TableCell>
+              <TableCell align="right" >
+              <Button onClick={() => {
+                        const updateAddProduct = handleProductQuantity(row.id, Number(row.qunatity) + 1, addCarts)
+                        console.log(updateAddProduct)
+                        dispatch({
+                          type: 'update_cart',
+                          payload: { cartProduct: updateAddProduct }
+                        })
+                      }
+
+                      }>+</Button>
+              { row.quantity==""?0:Number(row.qunatity)}
+              <Button onClick={() => {
+                        const updateAddProduct = handleProductQuantity(row.id, Number(row.qunatity)-1 , addCarts)
+                        console.log(updateAddProduct)
+                        dispatch({
+                          type: 'update_cart',
+                          payload: { cartProduct: updateAddProduct }
+                        })
+                      }
+
+                      }>-</Button>
+              </TableCell>
+              <TableCell align="right">{(Number(row.qunatity)*Number(row.price))}</TableCell>
             </TableRow>
           ))}
         </TableBody>

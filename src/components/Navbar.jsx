@@ -2,14 +2,37 @@ import React from "react";
 import {AppBar,Box,Toolbar,InputLabel ,MenuItem,FormControl,Select,Button, Typography} from "@mui/material";
 import TextField from '@mui/material/TextField';
 import style from "../utils/style";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import {useNavigate} from 'react-router-dom'
 {
   /* That navbar by using material ui*/
 }
 const Navbar = () => {
+  const navigate=useNavigate()
+  const dispatch=useDispatch()
   const [age, setAge] = React.useState('');
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+  
+  const selector = useSelector((state) => {
+    return {
+      productsData: state.Addproducts
+    }
+  })
+  const { productsData } = selector
+  
+  const handleClick=(e)=>{
+    navigate('/addtocart')
+    e.preventDefault();
+    dispatch({
+      type:'let addtocart',
+      payload:{productsData}
+    })
+
+  }
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
     
@@ -59,7 +82,7 @@ const Navbar = () => {
           size="small"
           color="primary"
         />
-        <Button variant='contained' sx={style.addToCartButton} >Add To Cart</Button>
+        <Button variant='contained' onClick={(e)=>handleClick(e)} sx={style.addToCartButton} >Add To Cart</Button>
         </Toolbar>
       </AppBar>
     </Box>

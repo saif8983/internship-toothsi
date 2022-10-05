@@ -9,32 +9,47 @@ import style from '../utils/style';
 import products from '../local-JSON/productsAPI.json'
 import Navbar from './Navbar';
 import { Stack } from '@mui/system';
+import { useDispatch } from 'react-redux';
 export default function AcccessibleTable() {
+ const dispatch=useDispatch()
   const [productsData]=useState(products)
   const [quantity,setQuantity]=useState({})
   const [data,setData]=useState([])
+  console.log(data)
+  const [checked,setChecked]=useState()
   
   const handleChange=(value)=>{
 const obj={qunatity:value}
-setQuantity(obj)
+setQuantity({...quantity,...obj})
   }
   const handleCheck=(e,item,quantity)=>{
+    e.preventDefault();
 const productQuantity={...item,...quantity}
+const productQuantityStrigfy=JSON.stringify(productQuantity)
+const productQuantityParse=JSON.parse(productQuantityStrigfy)
+console.log(productQuantityParse)
 if(e.target.checked){
-  setData([...data,productQuantity])
+  setChecked(true)
+  setData(productQuantityParse)
 }else{
-  const index=data.findIndex(item=>item.id===productQuantity.id)
-  if(index){
-  const arrayofData=data.splice(index-1,1)
-  setData(arrayofData)}
-  else if(index==0){
-setData('')
+  setChecked(false)
+  setData(productQuantityParse)
   }
 }
-  }
   useEffect(() => {
-    console.log(data)
-  }, [data]);
+    if (checked) {
+      dispatch({
+        type: 'let product',
+        payload:  {data}
+      })
+  }else{
+    dispatch({
+      type: 'let uncheckproduct',
+      payload:  {data}
+    })
+  }
+
+  }, [data,checked]);
   return (
     <>
 <Navbar/>

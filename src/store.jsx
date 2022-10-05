@@ -1,0 +1,92 @@
+import {
+    configureStore
+} from "@reduxjs/toolkit"
+const initia_State = {
+    products: [],
+    value: []
+    , inputSearch: []
+    , Addproducts: []
+    , AddCartData: []
+}
+
+const store = configureStore({
+    reducer: (state, action) => {
+        console.log(state)
+        const {
+            type,
+            payload,
+        } = action
+        switch (type) {
+            case 'put value':
+                return {
+                    ...state,
+                    value: payload.value,
+                }
+            case 'curValue':
+                return {
+                    ...state,
+                    inputSearch: payload.curVal
+                }
+            case 'mensShirt':
+                return {
+                    ...state,
+                    value: payload.shirt
+                }
+            case 'jewelery':
+                return {
+                    ...state,
+                    value: payload.jew
+                }
+            case 'let addtocart':
+                return {
+                    ...state,
+                    products: [...state.products,...payload.productsData]
+                }
+            case 'let product':
+                console.log(payload.data)
+                
+                return {
+                    ...state,
+                    Addproducts: [...state.Addproducts.filter(item=>item.id!==payload.data.id),{...payload.data}]
+                }
+                case 'let uncheckproduct':
+                    const {
+                        data
+                    }= payload
+                    console.log(data)
+                    return {
+                        ...state,
+                        Addproducts:[...state.Addproducts.filter(item=>item.id!==data.id)]
+                    }
+            case 'addcart value':
+                const {
+                    product
+                } = payload
+                console.log(state)
+                return {
+                    ...state
+                    , AddCartData: [...state.AddCartData.filter(item=>item.id!==product.id), {...product,quantity:1}]
+                }
+            case 'all products':
+                return {
+                    ...state,
+                    value: payload.All
+                }
+                case 'update_cart':
+                  const  {cartProduct}=payload
+                  console.log(cartProduct)
+                    return{
+                    ...state,
+                        products:cartProduct
+
+                    }
+                    case 'remove_cart':
+                        const {removeProduct}=payload
+                        return {...state,
+                            products:[...state.products.filter(item=> item!==removeProduct)]}
+            default:
+                return initia_State
+        }
+    }
+})
+export default store
