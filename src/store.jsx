@@ -3,8 +3,11 @@ import {
 } from "@reduxjs/toolkit"
 const initia_State = {
     products: [],
-    value: []
-    , inputSearch: []
+    valueOfCategory: []
+    , 
+    valueOfSize: [],
+    valueOfSearch:[],
+    inputSearch: []
     , Addproducts: []
     , AddCartData: []
 }
@@ -17,25 +20,25 @@ const store = configureStore({
             payload,
         } = action
         switch (type) {
-            case 'put value':
+            case 'let search':
                 return {
                     ...state,
-                    value: payload.value,
+                    valueOfSearch: payload.searchValue,
                 }
             case 'curValue':
                 return {
                     ...state,
                     inputSearch: payload.curVal
                 }
-            case 'mensShirt':
+            case 'category':
                 return {
                     ...state,
-                    value: payload.shirt
+                    valueOfCategory: payload.categoryValue
                 }
-            case 'jewelery':
+            case 'size':
                 return {
                     ...state,
-                    value: payload.jew
+                    valueOfSize: payload.sizeValue
                 }
             case 'let addtocart':
                 return {

@@ -1,5 +1,5 @@
 import React from "react";
-import {AppBar,Box,Toolbar,InputLabel ,MenuItem,FormControl,Select,Button, Typography} from "@mui/material";
+import {AppBar,Box,Toolbar,InputLabel ,MenuItem,FormControl,Select,Button, Typography, stepConnectorClasses} from "@mui/material";
 import TextField from '@mui/material/TextField';
 import style from "../utils/style";
 import { useDispatch } from "react-redux";
@@ -11,9 +11,24 @@ import {useNavigate} from 'react-router-dom'
 const Navbar = () => {
   const navigate=useNavigate()
   const dispatch=useDispatch()
-  const [age, setAge] = React.useState('');
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const [category, setCategory] = React.useState('');
+  const [size, setSize] = React.useState('');
+  const handleChangeCategory = (categoryValue) => {
+    console.log(categoryValue)
+    setCategory(categoryValue)
+    
+    dispatch({
+      type:'category',
+      payload:{categoryValue}
+    })
+  };
+  const handleChangeSize = (sizeValue) => {
+    setSize(sizeValue)
+    
+    dispatch({
+      type:'size',
+      payload:{sizeValue}
+    })
   };
   
   const selector = useSelector((state) => {
@@ -32,7 +47,17 @@ const Navbar = () => {
     })
 
   }
-  
+  const handleReset=()=>{ 
+    handleChangeCategory('reset')
+    handleChangeSize('reset')
+
+  }
+  const handleSearch=(searchValue)=>{
+      dispatch({
+        type:'let search',
+        payload:{searchValue}
+      })
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
     
@@ -43,16 +68,16 @@ const Navbar = () => {
       <Select
         labelId="demo-select-small"
         id="demo-select-small"
-        value={age}
+        value={category}
         label="Age"
-        onChange={handleChange}
+        onChange={(e)=>handleChangeCategory(e.target.value)}
       >
-        <MenuItem value="">
+        <MenuItem value="reset">
           <em>None</em>
         </MenuItem>
-        <MenuItem value={10}>Hoddies</MenuItem>
-        <MenuItem value={20}>T-shirts</MenuItem>
-        <MenuItem value={30}>Shirts</MenuItem>
+        <MenuItem value='Hoodies'>Hoddies</MenuItem>
+        <MenuItem value='T-shirt'>T-shirts</MenuItem>
+        <MenuItem value='shirts'>Shirts</MenuItem>
       </Select>
     </FormControl>
          
@@ -61,19 +86,19 @@ const Navbar = () => {
       <Select
         labelId="demo-select-small"
         id="demo-select-small"
-        value={age}
+        value={size}
         label="Age"
-        onChange={handleChange}
+        onChange={(e)=>handleChangeSize(e.target.value)}
       >
-        <MenuItem value="">
+        <MenuItem value="reset">
           <em>None</em>
         </MenuItem>
-        <MenuItem value={10}>XL</MenuItem>
-        <MenuItem value={20}>XXL</MenuItem>
-        <MenuItem value={30}>XXL</MenuItem>
+        <MenuItem value='xl'>XL</MenuItem>
+        <MenuItem value='xxl'>XXL</MenuItem>
+        <MenuItem value='xxxl'>XXXL</MenuItem>
       </Select>
     </FormControl>
-    <Button>Reset</Button>
+    <Button  onClick={()=>handleReset()}>Reset</Button>
     <Typography style={style.colorSearchNavbar}>search:</Typography>
     <TextField
     sx={style.searchNavbar}
@@ -81,6 +106,7 @@ const Navbar = () => {
           id="outlined-size-small"
           size="small"
           color="primary"
+          onChange={(e)=>handleSearch(e.target.value)}
         />
         <Button variant='contained' onClick={(e)=>handleClick(e)} sx={style.addToCartButton} >Add To Cart</Button>
         </Toolbar>
