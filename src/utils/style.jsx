@@ -37,8 +37,14 @@ const style = {
       width:'15rem'
     },
     inputQuantitycss:{
-      width:"2rem",
+      width:"3rem",
       height:'2%'
+    },
+    addCartPriceCss:{
+      color:'grey'
+    },
+    addCartSubtotal:{
+     color:'green'
     }
 }
 export default style
